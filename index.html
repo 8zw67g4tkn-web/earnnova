@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08130f">
+<title>EarnNova — Discover • Refer • Earn</title>
+<style>
+:root{--bg:#08130f;--panel:#102019;--panel2:#14271f;--line:#244236;--green:#63e6a5;--muted:#a8beb3;--white:#f4fff8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1c4934 0,transparent 38%),var(--bg);color:var(--white);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:5;background:#08130feF;border-bottom:1px solid #244236;backdrop-filter:blur(14px)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-size:23px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--green)}.navlinks{display:flex;gap:22px;color:var(--muted);font-size:13px}.navlinks a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:12px;background:var(--green);color:#062014;font-weight:800;border:0;cursor:pointer}
+.hero{padding:66px 0 42px;display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(38px,6vw,66px);line-height:1.03;letter-spacing:-2.8px;margin:14px 0}.hero h1 em{font-style:normal;color:var(--green)}.hero p{color:var(--muted);max-width:570px;font-size:16px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn.secondary{background:transparent;color:var(--white);border:1px solid var(--line)}
+.hero-card{background:linear-gradient(145deg,#183b2b,#102019 70%);border:1px solid #315b45;border-radius:26px;padding:24px;box-shadow:0 22px 70px #0005}.hero-card .big{font-size:46px}.hero-card h3{margin:8px 0}.hero-card p{font-size:13px}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.mini{padding:13px;background:#0b1912;border:1px solid var(--line);border-radius:14px}.mini b{display:block;color:var(--green);font-size:18px}.mini small{color:var(--muted)}
+section{padding:30px 0 42px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}.section-head h2{margin:4px 0;font-size:27px;letter-spacing:-.8px}.section-head p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.tile,.item{background:linear-gradient(145deg,#12251c,#0d1b14);border:1px solid var(--line);border-radius:18px;padding:18px}.tile{transition:.2s}.tile:hover,.item:hover{transform:translateY(-3px);border-color:#4c9b70}.tile .ico{font-size:25px}.tile h3{margin:10px 0 3px}.tile p,.item p{color:var(--muted);font-size:13px;margin:0}.item-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.tag{font-size:10px;color:var(--green);background:#173b29;padding:5px 8px;border-radius:30px;font-weight:800}.item h3{margin:12px 0 5px}.item .go{display:inline-block;margin-top:15px;color:var(--green);font-weight:800;font-size:13px}.toolbar{display:flex;gap:10px;margin:0 0 16px}.search{width:100%;padding:13px 15px;border-radius:12px;background:#0d1b14;border:1px solid var(--line);color:white;outline:none}.empty{color:var(--muted);padding:20px;text-align:center;border:1px dashed var(--line);border-radius:14px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:12px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding-top:45px}.hero-card{max-width:520px}.grid{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column}}
+@media(max-width:460px){.grid{grid-template-columns:1fr}.hero h1{letter-spacing:-1.8px}.nav{height:62px}.brand{font-size:21px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="#">Earn<span>Nova</span> ✦</a><nav class="navlinks"><a href="#categories">Categories</a><a href="#latest">Latest</a><a href="#about">About</a></nav><a class="btn" href="#categories">Explore Now</a></div></header>
+<main class="wrap">
+<div class="hero">
+  <div><div class="eyebrow">Discover · Refer · Earn</div><h1>Find smarter ways to <em>earn online.</em></h1><p>Explore earning apps, referral programs, free opportunities and useful communities — all in one place.</p><div class="hero-actions"><a class="btn" href="#categories">Explore Categories ↗</a><a class="btn secondary" href="#latest">What's New</a></div></div>
+  <div class="hero-card"><div class="big">✦</div><div class="eyebrow">Welcome to EarnNova</div><h3>Your earning discovery hub</h3><p>New platforms, referral offers and free earning resources, organised in one simple directory.</p><div class="mini-grid"><div class="mini"><b>01</b><small>Explore apps</small></div><div class="mini"><b>02</b><small>Check details</small></div><div class="mini"><b>03</b><small>Read terms</small></div><div class="mini"><b>04</b><small>Join safely</small></div></div></div>
+</div>
+<section id="categories"><div class="section-head"><div><div class="eyebrow">Browse by interest</div><h2>Explore Categories</h2><p>Choose what you are looking for.</p></div></div>
+<div class="grid">
+<a class="tile" href="#latest" data-filter="Referral Earn"><div class="ico">👥</div><h3>Referral Earn</h3><p>Referral apps, invite programs and rewards.</p></a>
+<a class="tile" href="#latest" data-filter="Free Earning"><div class="ico">🎁</div><h3>Free Earning</h3><p>Free-to-join earning websites and tasks.</p></a>
+<a class="tile" href="#latest" data-filter="Daily Income"><div class="ico">📈</div><h3>Daily Income</h3><p>Discover platforms with earning activities.</p></a>
+<a class="tile" href="#latest" data-filter="New Apps"><div class="ico">🚀</div><h3>New Apps</h3><p>Recently added apps and platforms.</p></a>
+<a class="tile" href="#latest" data-filter="Telegram Groups"><div class="ico">✈️</div><h3>Telegram Groups</h3><p>Community channels and useful groups.</p></a>
+<a class="tile" href="#latest" data-filter="Bonus & Offers"><div class="ico">🎯</div><h3>Bonus & Offers</h3><p>Promotions, bonuses and special offers.</p></a>
+</div></section>
+<section id="latest"><div class="section-head"><div><div class="eyebrow">Fresh updates</div><h2>Latest Listings</h2><p>Sample cards — replace these with verified listings before publishing.</p></div></div><div class="toolbar"><input class="search" id="search" placeholder="Search apps, websites or categories…"></div><div class="grid" id="listings">
+<div class="item" data-category="Referral Earn"><div class="item-top"><span class="tag">REFERRAL EARN</span><span>👥</span></div><h3>Referral Program</h3><p>Add your referral platform details, eligibility and reward terms here.</p><a class="go" href="#about">Details coming soon →</a></div>
+<div class="item" data-category="Free Earning"><div class="item-top"><span class="tag">FREE EARNING</span><span>🎁</span></div><h3>Free Earning Website</h3><p>Add a free-to-join website with clear conditions and payout information.</p><a class="go" href="#about">Details coming soon →</a></div>
+<div class="item" data-category="New Apps"><div class="item-top"><span class="tag">NEW APPS</span><span>🚀</span></div><h3>New App Listing</h3><p>Share what the app does, any fees, risks and official download link.</p><a class="go" href="#about">Details coming soon →</a></div>
+</div></section>
+<section id="about"><div class="tile"><div class="eyebrow">Stay informed</div><h2>Earn smart. Stay aware.</h2><p>EarnNova is an information directory, not a guarantee of income. Always check official terms, fees, privacy policies and withdrawal conditions before joining any platform. Never share OTPs, passwords or payment PINs.</p></div></section>
+</main>
+<footer><div class="wrap foot"><span>© 2026 EarnNova. All rights reserved.</span><span>Discover · Refer · Earn</span></div></footer>
+<script>
+const search=document.getElementById('search');
+const cards=[...document.querySelectorAll('#listings .item')];
+let active='';
+function apply(){const q=(search.value||'').toLowerCase();cards.forEach(c=>{const ok=(!active||c.dataset.category===active)&&c.innerText.toLowerCase().includes(q);c.style.display=ok?'block':'none';});}
+search.addEventListener('input',apply);
+document.querySelectorAll('[data-filter]').forEach(a=>a.addEventListener('click',()=>{active=a.dataset.filter;search.value='';setTimeout(apply,0);}));
+</script>
+</body></html>
