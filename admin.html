@@ -157,35 +157,43 @@ resetForm();
 loadListings();
 }
 
+
 async function loadListings(){
-const box=document.getElementById("listings");
-box.textContent="Loading...";
+  const box = document.getElementById("listings");
+  box.textContent = "Loading...";
 
-const {data,error}=await db.from("listings")
-.select("*").order("created_at",{ascending:false});
+  try {
+    const { data, error } = await db
+      .from("listings")
+      .select("*");
 
-if(error){
-box.textContent="Error: "+error.message;
-return;
+    if(error){
+      box.textContent = "Database Error: " + error.message;
+      return;
+    }
+
+    if(!data || data.length === 0){
+      box.textContent = "No listings added yet.";
+      return;
+    }
+
+    box.innerHTML = data.map(item => `
+      <div class="item">
+        <h3>${safe(item.name)}</h3>
+        <p>${safe(item.category)}</p>
+        <p>${safe(item.description)}</p>
+        ${item.image_url ? `<img src="${safe(item.image_url)}" alt="Listing image">` : ""}
+        <p><a href="${safe(item.link)}" target="_blank" rel="noopener noreferrer">Open Link</a></p>
+        <button class="edit" onclick="editListing('${safe(item.id)}')">Edit</button>
+        <button class="delete" onclick="deleteListing('${safe(item.id)}')">Delete</button>
+      </div>
+    `).join("");
+
+  } catch(err) {
+    box.textContent = "Error: " + err.message;
+  }
 }
 
-if(!data.length){
-box.textContent="No listings added yet.";
-return;
-}
-
-box.innerHTML=data.map(item=>`
-<div class="item">
-<h3>${safe(item.name)}</h3>
-<p>${safe(item.category)}</p>
-<p>${safe(item.description)}</p>
-${item.image_url ? `<img src="${safe(item.image_url)}" alt="Listing image">` : ""}
-<p><a href="${safe(item.link)}" target="_blank" rel="noopener noreferrer">Open Link</a></p>
-<button class="edit" onclick="editListing('${safe(item.id)}')">Edit</button>
-<button class="delete" onclick="deleteListing('${safe(item.id)}')">Delete</button>
-</div>
-`).join("");
-}
 
 async function editListing(id){
 const {data,error}=await db.from("listings")
