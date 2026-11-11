@@ -1,55 +1,335 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#08130f">
-<title>EarnNova — Discover • Refer • Earn</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07130e">
+<title>EarnNova | Discover • Refer • Earn</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#08130f;--panel:#102019;--panel2:#14271f;--line:#244236;--green:#63e6a5;--muted:#a8beb3;--white:#f4fff8}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1c4934 0,transparent 38%),var(--bg);color:var(--white);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:5;background:#08130feF;border-bottom:1px solid #244236;backdrop-filter:blur(14px)}
-.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-size:23px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--green)}.navlinks{display:flex;gap:22px;color:var(--muted);font-size:13px}.navlinks a:hover{color:var(--green)}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:12px;background:var(--green);color:#062014;font-weight:800;border:0;cursor:pointer}
-.hero{padding:66px 0 42px;display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(38px,6vw,66px);line-height:1.03;letter-spacing:-2.8px;margin:14px 0}.hero h1 em{font-style:normal;color:var(--green)}.hero p{color:var(--muted);max-width:570px;font-size:16px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn.secondary{background:transparent;color:var(--white);border:1px solid var(--line)}
-.hero-card{background:linear-gradient(145deg,#183b2b,#102019 70%);border:1px solid #315b45;border-radius:26px;padding:24px;box-shadow:0 22px 70px #0005}.hero-card .big{font-size:46px}.hero-card h3{margin:8px 0}.hero-card p{font-size:13px}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.mini{padding:13px;background:#0b1912;border:1px solid var(--line);border-radius:14px}.mini b{display:block;color:var(--green);font-size:18px}.mini small{color:var(--muted)}
-section{padding:30px 0 42px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}.section-head h2{margin:4px 0;font-size:27px;letter-spacing:-.8px}.section-head p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.tile,.item{background:linear-gradient(145deg,#12251c,#0d1b14);border:1px solid var(--line);border-radius:18px;padding:18px}.tile{transition:.2s}.tile:hover,.item:hover{transform:translateY(-3px);border-color:#4c9b70}.tile .ico{font-size:25px}.tile h3{margin:10px 0 3px}.tile p,.item p{color:var(--muted);font-size:13px;margin:0}.item-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.tag{font-size:10px;color:var(--green);background:#173b29;padding:5px 8px;border-radius:30px;font-weight:800}.item h3{margin:12px 0 5px}.item .go{display:inline-block;margin-top:15px;color:var(--green);font-weight:800;font-size:13px}.toolbar{display:flex;gap:10px;margin:0 0 16px}.search{width:100%;padding:13px 15px;border-radius:12px;background:#0d1b14;border:1px solid var(--line);color:white;outline:none}.empty{color:var(--muted);padding:20px;text-align:center;border:1px dashed var(--line);border-radius:14px}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:12px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:760px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding-top:45px}.hero-card{max-width:520px}.grid{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column}}
-@media(max-width:460px){.grid{grid-template-columns:1fr}.hero h1{letter-spacing:-1.8px}.nav{height:62px}.brand{font-size:21px}}
+:root{
+--bg:#07130e;--card:#10251a;--card2:#142c20;
+--green:#62e6a2;--text:#f3fff7;--muted:#9db7a7;
+--line:#244633;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+margin:0;background:radial-gradient(ellipse at 80% 0%,#19452d 0,transparent 35%),var(--bg);
+color:var(--text);font-family:Arial,sans-serif;
+}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1120px,92%);margin:auto}
+header{
+position:sticky;top:0;z-index:10;
+background:#07130eee;backdrop-filter:blur(15px);
+border-bottom:1px solid var(--line)
+}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--green)}
+.navlinks{display:flex;gap:20px;color:var(--muted);font-size:13px}
+.navlinks a:hover{color:var(--green)}
+.btn{
+display:inline-block;padding:12px 18px;border-radius:12px;
+background:var(--green);color:#06170d;font-weight:800;
+border:0;cursor:pointer
+}
+.hero{
+padding:75px 0 55px;display:grid;
+grid-template-columns:1.2fr .8fr;gap:35px;align-items:center
+}
+.eyebrow{color:var(--green);font-size:11px;font-weight:900;letter-spacing:2px}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.05;letter-spacing:-2px;margin:15px 0}
+.hero h1 span{color:var(--green)}
+.hero p{color:var(--muted);line-height:1.8;max-width:530px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn2{background:transparent;border:1px solid var(--line);color:white}
+.hero-card{
+padding:28px;border:1px solid #315d43;border-radius:25px;
+background:linear-gradient(145deg,#1b402a,#102319);
+box-shadow:0 20px 60px #0005
+}
+.hero-icon{font-size:50px;color:var(--green)}
+.hero-card h2{margin:10px 0}
+.hero-card p{font-size:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.stat{padding:15px;background:#081a10;border:1px solid var(--line);border-radius:13px}
+.stat b{display:block;color:var(--green);font-size:20px}
+.stat small{color:var(--muted)}
+section{padding:35px 0}
+.heading{margin-bottom:20px}
+.heading h2{font-size:27px;margin:7px 0}
+.heading p{color:var(--muted);font-size:13px}
+.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.category{
+padding:20px;background:linear-gradient(145deg,#142b1d,#0d1d14);
+border:1px solid var(--line);border-radius:17px;
+transition:.2s;cursor:pointer
+}
+.category:hover{transform:translateY(-4px);border-color:var(--green)}
+.category .ico{font-size:27px}
+.category h3{margin:10px 0 4px}
+.category p{color:var(--muted);font-size:12px;margin:0}
+.toolbar{display:flex;gap:10px;margin-bottom:18px}
+.search{
+width:100%;padding:15px;background:#102319;
+border:1px solid var(--line);border-radius:12px;
+color:white;outline:none;font-size:14px
+}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.filter{
+padding:9px 13px;border-radius:30px;
+border:1px solid var(--line);color:var(--muted);
+background:#102319;font-size:12px;cursor:pointer
+}
+.filter.active{background:var(--green);color:#06170d;border-color:var(--green)}
+.listings{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.item{
+padding:17px;background:linear-gradient(145deg,#142b1e,#0c1b13);
+border:1px solid var(--line);border-radius:18px;
+transition:.2s;overflow:hidden
+}
+.item:hover{transform:translateY(-4px);border-color:#4f9b70}
+.item img{width:100%;height:155px;object-fit:cover;border-radius:12px;margin-bottom:12px}
+.tag{
+display:inline-block;padding:5px 9px;border-radius:30px;
+background:#1a4029;color:var(--green);font-size:10px;font-weight:bold
+}
+.item h3{margin:12px 0 6px}
+.item p{font-size:13px;color:var(--muted);line-height:1.6}
+.go{display:inline-block;margin-top:14px;color:var(--green);font-size:13px;font-weight:bold}
+.empty{
+grid-column:1/-1;padding:30px;text-align:center;
+border:1px dashed var(--line);border-radius:15px;color:var(--muted)
+}
+.support{
+padding:28px;border-radius:20px;
+background:linear-gradient(120deg,#163b27,#102319);
+border:1px solid #315d43
+}
+.support h2{margin-top:0}
+.support p{color:var(--muted)}
+footer{margin-top:35px;padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){
+.navlinks{display:none}
+.hero{grid-template-columns:1fr;padding-top:45px}
+.category-grid,.listings{grid-template-columns:1fr 1fr}
+}
+@media(max-width:460px){
+.category-grid,.listings{grid-template-columns:1fr}
+.hero h1{font-size:43px}
+.nav{height:60px}
+}
 </style>
 </head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="#">Earn<span>Nova</span> ✦</a><nav class="navlinks"><a href="#categories">Categories</a><a href="#latest">Latest</a><a href="#about">About</a></nav><a class="btn" href="#categories">Explore Now</a></div></header>
-<main class="wrap">
-<div class="hero">
-  <div><div class="eyebrow">Discover · Refer · Earn</div><h1>Find smarter ways to <em>earn online.</em></h1><p>Explore earning apps, referral programs, free opportunities and useful communities — all in one place.</p><div class="hero-actions"><a class="btn" href="#categories">Explore Categories ↗</a><a class="btn secondary" href="#latest">What's New</a></div></div>
-  <div class="hero-card"><div class="big">✦</div><div class="eyebrow">Welcome to EarnNova</div><h3>Your earning discovery hub</h3><p>New platforms, referral offers and free earning resources, organised in one simple directory.</p><div class="mini-grid"><div class="mini"><b>01</b><small>Explore apps</small></div><div class="mini"><b>02</b><small>Check details</small></div><div class="mini"><b>03</b><small>Read terms</small></div><div class="mini"><b>04</b><small>Join safely</small></div></div></div>
+
+<header>
+<div class="wrap nav">
+<a class="logo" href="#">Earn<span>Nova</span> ✦</a>
+<nav class="navlinks">
+<a href="#categories">Categories</a>
+<a href="#latest">Latest</a>
+<a href="#support">Support</a>
+</nav>
+<a href="#categories" class="btn">Explore Now ↗</a>
 </div>
-<section id="categories"><div class="section-head"><div><div class="eyebrow">Browse by interest</div><h2>Explore Categories</h2><p>Choose what you are looking for.</p></div></div>
-<div class="grid">
-<a class="tile" href="#latest" data-filter="Referral Earn"><div class="ico">👥</div><h3>Referral Earn</h3><p>Referral apps, invite programs and rewards.</p></a>
-<a class="tile" href="#latest" data-filter="Free Earning"><div class="ico">🎁</div><h3>Free Earning</h3><p>Free-to-join earning websites and tasks.</p></a>
-<a class="tile" href="#latest" data-filter="Daily Income"><div class="ico">📈</div><h3>Daily Income</h3><p>Discover platforms with earning activities.</p></a>
-<a class="tile" href="#latest" data-filter="New Apps"><div class="ico">🚀</div><h3>New Apps</h3><p>Recently added apps and platforms.</p></a>
-<a class="tile" href="#latest" data-filter="Telegram Groups"><div class="ico">✈️</div><h3>Telegram Groups</h3><p>Community channels and useful groups.</p></a>
-<a class="tile" href="#latest" data-filter="Bonus & Offers"><div class="ico">🎯</div><h3>Bonus & Offers</h3><p>Promotions, bonuses and special offers.</p></a>
-</div></section>
-<section id="latest"><div class="section-head"><div><div class="eyebrow">Fresh updates</div><h2>Latest Listings</h2><p>Sample cards — replace these with verified listings before publishing.</p></div></div><div class="toolbar"><input class="search" id="search" placeholder="Search apps, websites or categories…"></div><div class="grid" id="listings">
-<div class="item" data-category="Referral Earn"><div class="item-top"><span class="tag">REFERRAL EARN</span><span>👥</span></div><h3>Referral Program</h3><p>Add your referral platform details, eligibility and reward terms here.</p><a class="go" href="#about">Details coming soon →</a></div>
-<div class="item" data-category="Free Earning"><div class="item-top"><span class="tag">FREE EARNING</span><span>🎁</span></div><h3>Free Earning Website</h3><p>Add a free-to-join website with clear conditions and payout information.</p><a class="go" href="#about">Details coming soon →</a></div>
-<div class="item" data-category="New Apps"><div class="item-top"><span class="tag">NEW APPS</span><span>🚀</span></div><h3>New App Listing</h3><p>Share what the app does, any fees, risks and official download link.</p><a class="go" href="#about">Details coming soon →</a></div>
-</div></section>
-<section id="about"><div class="tile"><div class="eyebrow">Stay informed</div><h2>Earn smart. Stay aware.</h2><p>EarnNova is an information directory, not a guarantee of income. Always check official terms, fees, privacy policies and withdrawal conditions before joining any platform. Never share OTPs, passwords or payment PINs.</p></div></section>
+</header>
+
+<main class="wrap">
+
+<div class="hero">
+<div>
+<div class="eyebrow">WELCOME TO EARNNOVA</div>
+<h1>Discover smarter ways to <span>earn online.</span></h1>
+<p>Explore earning apps, referral programs, free opportunities and useful communities — all in one place.</p>
+<div class="actions">
+<a href="#categories" class="btn">Explore Categories ↗</a>
+<a href="#latest" class="btn btn2">Latest Updates</a>
+</div>
+</div>
+
+<div class="hero-card">
+<div class="hero-icon">✦</div>
+<div class="eyebrow">YOUR EARNING DISCOVERY HUB</div>
+<h2>Explore. Discover. Grow.</h2>
+<p>Find useful platforms and opportunities. Always check official terms before joining.</p>
+<div class="stats">
+<div class="stat"><b>01</b><small>Explore Apps</small></div>
+<div class="stat"><b>02</b><small>Refer & Earn</small></div>
+<div class="stat"><b>03</b><small>Free Opportunities</small></div>
+<div class="stat"><b>04</b><small>Join Communities</small></div>
+</div>
+</div>
+</div>
+
+<section id="categories">
+<div class="heading">
+<div class="eyebrow">BROWSE YOUR INTEREST</div>
+<h2>Explore Categories</h2>
+<p>Choose the opportunity you want to explore.</p>
+</div>
+<div class="category-grid">
+<div class="category" data-filter="Referral Earn"><div class="ico">👥</div><h3>Referral Earn</h3><p>Referral programs and rewards.</p></div>
+<div class="category" data-filter="Free Earning"><div class="ico">🎁</div><h3>Free Earning</h3><p>Free-to-join websites and tasks.</p></div>
+<div class="category" data-filter="Daily Income"><div class="ico">📈</div><h3>Daily Income</h3><p>Discover earning activities.</p></div>
+<div class="category" data-filter="New Apps"><div class="ico">🚀</div><h3>New Apps</h3><p>Recently added applications.</p></div>
+<div class="category" data-filter="Telegram Groups"><div class="ico">✈️</div><h3>Telegram Groups</h3><p>Channels and useful communities.</p></div>
+<div class="category" data-filter="Bonus & Offers"><div class="ico">🎯</div><h3>Bonus & Offers</h3><p>Promotions and special offers.</p></div>
+</div>
+</section>
+
+<section id="latest">
+<div class="heading">
+<div class="eyebrow">FRESH UPDATES</div>
+<h2>Latest Listings</h2>
+<p>New listings published by EarnNova Admin.</p>
+</div>
+
+<div class="toolbar">
+<input class="search" id="search" placeholder="Search apps, websites or categories...">
+</div>
+
+<div class="filters">
+<button class="filter active" data-category="">All</button>
+<button class="filter" data-category="Daily Income">Daily Income</button>
+<button class="filter" data-category="Free Earning">Free Earning</button>
+<button class="filter" data-category="Referral Earn">Referral Earn</button>
+<button class="filter" data-category="New Apps">New Apps</button>
+<button class="filter" data-category="Telegram Groups">Telegram Groups</button>
+<button class="filter" data-category="Bonus & Offers">Bonus & Offers</button>
+</div>
+
+<div class="listings" id="listings">
+<div class="empty">Loading listings...</div>
+</div>
+</section>
+
+<section id="support">
+<div class="support">
+<div class="eyebrow">NEED HELP?</div>
+<h2>Stay connected with EarnNova</h2>
+<p>Join our support community for updates and assistance.</p>
+<a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="btn">Telegram Support ↗</a>
+</div>
+</section>
+
+<section>
+<div class="support">
+<div class="eyebrow">STAY SAFE ONLINE</div>
+<h2>Earn smart. Stay aware.</h2>
+<p>EarnNova is an information directory, not a guarantee of income. Check official terms, fees, privacy policies and withdrawal conditions before joining. Never share OTPs, passwords or payment PINs.</p>
+</div>
+</section>
+
 </main>
-<footer><div class="wrap foot"><span>© 2026 EarnNova. All rights reserved.</span><span>Discover · Refer · Earn</span></div></footer>
+
+<footer>
+<div class="wrap foot">
+<span>© 2026 EarnNova. All rights reserved.</span>
+<span>Discover · Refer · Earn</span>
+</div>
+</footer>
+
 <script>
-const search=document.getElementById('search');
-const cards=[...document.querySelectorAll('#listings .item')];
-let active='';
-function apply(){const q=(search.value||'').toLowerCase();cards.forEach(c=>{const ok=(!active||c.dataset.category===active)&&c.innerText.toLowerCase().includes(q);c.style.display=ok?'block':'none';});}
-search.addEventListener('input',apply);
-document.querySelectorAll('[data-filter]').forEach(a=>a.addEventListener('click',()=>{active=a.dataset.filter;search.value='';setTimeout(apply,0);}));
+const SUPABASE_URL = "https://dambwmaukouhqagnpci.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_yl01Xo92CY1horXk6Gojpg_mwIdzdQO";
+
+const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+const box = document.getElementById("listings");
+const search = document.getElementById("search");
+const filters = document.querySelectorAll(".filter");
+
+let allListings = [];
+let active = "";
+
+function safe(value){
+return String(value || "").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",
+'"':"&quot;","'":"&#39;"
+})[c]);
+}
+
+function safeUrl(value){
+try{
+const url = new URL(value);
+return ["https:","http:"].includes(url.protocol) ? url.href : "";
+}catch{return "";}
+}
+
+function renderListings(){
+const q = search.value.toLowerCase();
+
+const filtered = allListings.filter(item=>{
+const content = [item.name,item.category,item.description].join(" ").toLowerCase();
+return (!active || item.category === active) && content.includes(q);
+});
+
+if(!filtered.length){
+box.innerHTML='<div class="empty">No listings found. Please check again later.</div>';
+return;
+}
+
+box.innerHTML=filtered.map(item=>{
+const link=safeUrl(item.link);
+const image=safeUrl(item.image_url);
+
+return `
+<div class="item">
+${image ? `<img src="${image}" alt="${safe(item.name)}" loading="lazy">` : ""}
+<span class="tag">${safe(item.category)}</span>
+<h3>${safe(item.name)}</h3>
+<p>${safe(item.description)}</p>
+${link ? `<a class="go" href="${link}" target="_blank" rel="noopener noreferrer">Explore Now ↗</a>` : ""}
+</div>`;
+}).join("");
+}
+
+async function loadListings(){
+box.innerHTML='<div class="empty">Loading listings...</div>';
+
+try{
+const {data,error}=await db.from("listings").select("*");
+
+if(error){
+box.innerHTML='<div class="empty">Database Error: '+safe(error.message)+'</div>';
+return;
+}
+
+allListings=data || [];
+renderListings();
+
+}catch(error){
+box.innerHTML='<div class="empty">Error: '+safe(error.message)+'</div>';
+}
+}
+
+search.addEventListener("input",renderListings);
+
+filters.forEach(button=>{
+button.addEventListener("click",()=>{
+active=button.dataset.category;
+filters.forEach(b=>b.classList.toggle("active",b===button));
+renderListings();
+});
+});
+
+document.querySelectorAll(".category[data-filter]").forEach(card=>{
+card.addEventListener("click",()=>{
+active=card.dataset.filter;
+filters.forEach(b=>b.classList.toggle("active",b.dataset.category===active));
+search.value="";
+renderListings();
+document.getElementById("latest").scrollIntoView({behavior:"smooth"});
+});
+});
+
+loadListings();
 </script>
-</body></html>
+
+</body>
+</html>
